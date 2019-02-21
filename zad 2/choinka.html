@@ -13,10 +13,10 @@
     <h5>Choinka może być zbudowana z co najmniej 3 poziomów i co najmniej jednego piętra. Każde piętro nr n+1 charakteryzuje się wcięciem, np 1-2 znaki. Po przyciśnięciu buttona "Generuj", powinna zostać narysowana prawidłowa choinka w elemencie o id="tree" oraz skrypt powinien obliczyć liczbę pięter.</h5>
     <div>
         <div class="actions">
-            <input type="text" placeholder="poziomy"/>
-            <input type="text" placeholder="pojemnosc pietra"/>
-            <button>Generuj</button>
-            <div>Liczba pięter: </div>
+            <input id="levels" type="text" placeholder="poziomy"/>
+            <input id="levelCapacity" type="text" placeholder="pojemnosc pietra"/>
+            <button id='generate'>Generuj</button>
+            <div>Liczba pięter: <span id="levelsAmount"></span> </div>
         </div>
         <div id="tree"></div>
     </div>
