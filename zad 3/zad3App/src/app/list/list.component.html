@@ -1,0 +1,14 @@
+<ul>
+  <div *ngFor="let parent of tree">
+    <input 
+      (change)="checkStatus(parent)" 
+      id="{{parent.label}}" 
+      type="checkbox">
+    <label for="{{parent.label}}">{{parent.label}}</label>
+
+    <div *ngFor="let child of parent.children">
+      <input (change)="checkStatus(child)" id="{{child.label}}" type="checkbox">
+      <label for="{{child.label}}">{{child.label}}</label>
+    </div>
+  </div>
+</ul>
