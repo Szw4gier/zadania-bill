@@ -17,15 +17,34 @@ const findHiddenLetters = (elements) => {
     return password;
 }
 
-const password = findHiddenLetters(letters);
+const showHiddenLetters = (elements) => {
+    const rows = elements[0].children;
 
-const passToString = password.join().replace(/,/g, '');
+    for (let row of rows) {
+        for (let letter of row.children) {
+            if (letter.style.backgroundColor === letter.style.color) {
+                letter.style.backgroundColor = '#000000';
+                letter.style.color = '#FFFFFF';
+            } else {
+                letter.style.backgroundColor = '#FFFFFF';
+                letter.style.color = '#FFFFFF';
+            }
+        }
+    }
+}
 
-const passwordField = document.getElementById('result');
+function getPassword(Letters) {
+    const password = findHiddenLetters(Letters);
+    return password.join().replace(/,/g, '');
+}
 
 function findPassword() {
+    const passToString = getPassword(letters);
+    const passwordField = document.getElementById('result');
     passwordField.style.color = "red";
     passwordField.innerHTML = passToString;
 }
 
-console.log(passToString);
+function showPassword() {
+    showHiddenLetters(letters);
+}
