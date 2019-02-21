@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import data from '../../assets/mock_tree';
 import { IState, ITreeData } from '../models/state.model';
+import { DataflowService } from '../services/dataflow.service';
 
 @Component({
   selector: 'app-list',
@@ -8,11 +9,12 @@ import { IState, ITreeData } from '../models/state.model';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  state = <IState>{};
+  private state = <IState>{};
+  private tree: Array<ITreeData>;
 
-  tree: Array<ITreeData>;
-
-  constructor() {
+  constructor(
+    private dataflow: DataflowService
+  ) {
     this.state.checkedBoxes = {};
     this.tree = data;
   }
@@ -34,6 +36,7 @@ export class ListComponent implements OnInit {
       })
     });
 
+    this.dataflow.stateChanged(initState);
     return initState;
   }
 
@@ -42,6 +45,7 @@ export class ListComponent implements OnInit {
     data.children.forEach(child => {
       this.state.checkedBoxes[child.label] = flag;
     });
+    this.dataflow.stateChanged(this.state);
   }
 
   changeStatus(data: ITreeData, input: HTMLInputElement): void {
