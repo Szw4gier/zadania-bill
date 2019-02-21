@@ -19,26 +19,33 @@ const getLevelsAmount = (levels, levelCapacity) => {
 }
 
 const drawTree  = (levels, levelCapacity) => {
-    const starNode = document.createElement('div');
-    const star = document.createTextNode('*');
-    starNode.appendChild(star);
-    tree.appendChild(starNode);
+    drawStar();    
 
-    let count = 0;
+    let count = 1;
     const whiteSpaces = [];
 
     while( count < levels ) {
         if ( count % levelCapacity !== 0) {
             whiteSpaces.push(' ');
+            
         }
-
-        const branchNode = document.createElement('div'); 
-        const branch = document.createTextNode('/' + whiteSpaces + '\\');
-        branchNode.appendChild(branch);
-        tree.appendChild(branchNode);
-
+        console.log(whiteSpaces);
+        drawBranch(whiteSpaces);
         count++;
     }
+}
+
+const drawStar = () => {
+    const starNode = document.createElement('div');
+    const star = document.createTextNode('*');
+    starNode.appendChild(star);
+    tree.appendChild(starNode);
+}
+
+const drawBranch = (whiteSpaces) => {
+    const branchNode = document.createElement('div');
+    branchNode.innerHTML = '/' + whiteSpaces.join().replace(/,/g, '&nbsp;') + '\\';
+    tree.appendChild(branchNode);
 }
 
 function displayTree() {
