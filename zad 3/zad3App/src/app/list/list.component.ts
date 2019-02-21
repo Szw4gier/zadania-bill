@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import data from '../../assets/mock_tree';
-import { IState, IInputState } from '../models/state.model';
+import { IState, ITreeData } from '../models/state.model';
 
 @Component({
   selector: 'app-list',
@@ -8,57 +8,43 @@ import { IState, IInputState } from '../models/state.model';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  state = <IState>{
-    checkedBoxes: Array<IInputState>()
-  };
+  state = <IState>{};
 
-  tree: Array<Object>;
+  tree: Array<ITreeData>;
 
   constructor() {
-    this.state.checkedBoxes = [];
+    this.state.checkedBoxes = {};
     this.tree = data;
   }
 
   ngOnInit() {
-    console.log(this.initializeStateData(this.tree));
-
-    // console.log(this.tree);
+    this.state = this.initializeStateData(this.tree);
   }
 
-  initializeStateData(treeData: Array<Object>): Array<IInputState> {
-    let updateState = <IState>{
-      checkedBoxes: Array<IInputState>()
+  initializeStateData(treeData: Array<ITreeData>): IState {
+    let initState = <IState>{
+      checkedBoxes: {}
     };
 
     treeData.forEach(parent => {
-      updateState.checkedBoxes.push(<IInputState>{
-        label: parent.label,
-        value: false
-      });
+      initState.checkedBoxes[parent.label] = false;
 
       parent.children.forEach(child => {
-        updateState.checkedBoxes.push(<IInputState>{
-          label: child.label,
-          value: false
-        });
+        initState.checkedBoxes[child.label] = false;
       })
     });
 
-    return updateState;
+    return initState;
   }
 
-  checkStatus(element): void {
-    this.changeStatus(element.value);
-
-    let childAmount = 0;
-    while (childAmount < element.children.lenght) {
-      this.changeStatus(element.children[childAmount].value);
-
-      childAmount++;
-    }
+  changeState(data: ITreeData, flag: boolean) {
+    this.state.checkedBoxes[data.label] = flag;
+    data.children.forEach(child => {
+      this.state.checkedBoxes[child.label] = flag;
+    });
   }
 
-  changeStatus(value): void {
-    this.state.checkedBoxes.push(value);
+  changeStatus(data: ITreeData, input: HTMLInputElement): void {
+    this.changeState(data, input.checked);
   }
 }
