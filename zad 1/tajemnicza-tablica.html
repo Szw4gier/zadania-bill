@@ -1,0 +1,89 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Zadanie 1</title>
+    <meta name="description" content="Tajemnicza tablica">
+    <meta name="author" content="Imie i Nazwisko">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="work-place">
+    <h2>Zad 1. W każdej komórce tabeli znajduje się jeden znak. Używając wyłącznie języka JavaScript, napisz skrypt operujący na poniższej tabeli, który:</h2>
+    <ul>
+        <li>Odnajdzie ukryte hasło, zgodnie z kolejnością, czyli od lewej do prawej komórki i od górnego do dolnego rzędu. Hasło powinno pojawić się po przyciśnieciu buttona "Odkryj", w polu id="result".</li>
+        <li>Po przyciśnięciu "Pokaż tylko ukryte", odkryje wszystkie ukryte komórki i ukryje resztę. Odkryta komórka powinna mieć ustawiony kolor tekstu na biały i prezentować się na czarnym tle. Hasło powinno zostać zresetowane oraz przycisk "Odkryj" powinien dalej działać poprawnie.</li>
+        <li>Po przyciśnięciu "Usuń niewidoczne i ustaw w jednym rzędzie", ustawi wszystkie widoczne komórki w jednym rzędzie, tak aby ułożyły czytelne hasło oraz zablokuje resztę przycisków.</li>
+    </ul>
+    <table>
+        <tbody>
+        <tr>
+            <td style="background-color: #e16800; color: #10e131">U</td>
+            <td style="background-color: #00dde1; color: #150a1c">N</td>
+            <td style="background-color: #567ae1; color: #200e10">I</td>
+            <td style="background-color: #e16800; color: #e16800">B</td>
+        </tr>
+        <tr>
+            <td style="background-color: #0026e1; color: #0026e1">I</td>
+            <td style="background-color: #6ae147; color: #000000">W</td>
+            <td style="background-color: #d5e1ce; color: #d5e1ce">L</td>
+            <td style="background-color: #d5e1ce; color: #d5e1ce">L</td>
+            <td style="background-color: #f5f5f5; color: #e16800">E</td>
+            <td style="background-color: #e10096; color: #3ae194">R</td>
+            <td style="background-color: #e18b44; color: #00e1db">S</td>
+            <td style="background-color: #0018e1; color: #e10016">Y</td>
+            <td style="background-color: #dfe1db; color: #e11d37">T</td>
+        </tr>
+        <tr>
+            <td style="background-color: #000000; color: #000000">E</td>
+            <td style="background-color: #dedfe1; color: #2d211a">E</td>
+            <td style="background-color: #91b0e1; color: #e10003">T</td>
+            <td style="background-color: #7f3f2b; color: #347261">&nbsp;</td>
+            <td style="background-color: #e10096; color: #7f3f2b">W</td>
+            <td style="background-color: #e1ccdd; color: #000000">A</td>
+            <td style="background-color: #6075e1; color: #a7e14d">R</td>
+            <td style="background-color: #f5f5f5; color: #f5f5f5">N</td>
+            <td style="background-color: #2e3ce1; color: #2e3ce1">N</td>
+            <td style="background-color: #e10400; color: #e10400">I</td>
+            <td style="background-color: #e12e34; color: #2e3ce1">M</td>
+            <td style="background-color: #e185ce; color: #e13b5a">I</td>
+            <td style="background-color: #1de1da; color: #e10064">N</td>
+        </tr>
+        <tr>
+            <td style="background-color: #c6e1d6; color: #c6e1d6">U</td>
+            <td style="background-color: #e14dc9; color: #e1000d">S</td>
+            <td style="background-color: #00d4e1; color: #ffe7ee">K</td>
+            <td style="background-color: #412512; color: #412512">M</td>
+            <td style="background-color: #d8d402; color: #d8d402">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="background-color: #347261; color: #347261">2</td>
+            <td style="background-color: #006ee1; color: #e1dedf">O</td>
+            <td style="background-color: #e19f5f; color: #6498e1">-</td>
+            <td style="background-color: #7f3f2b; color: #347261">M</td>
+            <td style="background-color: #000000; color: #000000">0</td>
+            <td style="background-color: #e1ccdd; color: #000000">A</td>
+            <td style="background-color: #6075e1; color: #a7e14d">Z</td>
+            <td style="background-color: #f5f5f5; color: #e10400">U</td>
+            <td style="background-color: #e10400; color: #1b4be1">R</td>
+            <td style="background-color: #d5d4e1; color: #d5d4e1">1</td>
+            <td style="background-color: #e185ce; color: #e13b5a">S</td>
+            <td style="background-color: #347261; color: #347261">9</td>
+            <td style="background-color: #006ee1; color: #a7e14d">K</td>
+            <td style="background-color: #1de1da; color: #347261">I</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="result">
+        <div>
+            <button>Odkryj</button>
+            <button>Pokaż tylko ukryte</button>
+            <button>Usuń niewidoczne i ustaw w jednym rzedzie</button>
+        </div>
+        <div>Sekretne hasło to: <span id="result" style="color: red"></span><div>
+        </div>
+        </div>
+        <script src="./tajemnicza-tablica.js"></script>
+</body>
+</html>

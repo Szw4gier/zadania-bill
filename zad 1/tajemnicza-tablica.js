@@ -1,0 +1,1 @@
+console.log("tajemnicza-tablica.js")

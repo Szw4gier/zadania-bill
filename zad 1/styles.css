@@ -1,0 +1,38 @@
+body, html {
+    height: 100%;
+}
+
+table {
+    max-width: 800px;
+}
+
+table td {
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.work-place {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 20px;
+    font-size: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+
+ul {
+    list-style-type: upper-alpha;
+    font-size: 18px;
+    padding: 0 10%;
+    margin: 20px 0 40px 0;
+}

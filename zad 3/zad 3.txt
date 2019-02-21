@@ -1,0 +1,5 @@
+Stwórz nowa aplikacje Angular i zaimplementuj filtr typu drzewko. Wymagania:
+- opcje mozna zwijac / rozwijac
+- multi select,
+- opcja zaznacz wszystkie dzieci,
+- opcja przeszukania wszystkich wartosci 
