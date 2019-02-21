@@ -2,6 +2,11 @@ console.log("tajemnicza-tablica.js")
 
 let letters = document.getElementsByTagName('tbody');
 
+document.getElementById('givePass')
+    .addEventListener("click", findPassword);
+document.getElementById('showPass')
+    .addEventListener("click", showPassword);
+
 const findHiddenLetters = (elements) => {
     const password = [];
 
