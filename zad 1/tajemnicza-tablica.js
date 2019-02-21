@@ -1,25 +1,28 @@
 console.log("tajemnicza-tablica.js")
 
 let letters = document.getElementsByTagName('tbody');
+let password = [];
 
 document.getElementById('givePass')
     .addEventListener("click", findPassword);
 document.getElementById('showPass')
     .addEventListener("click", showPassword);
+document.getElementById('toOneRow')
+    .addEventListener("click", setOneRow);
 
 const findHiddenLetters = (elements) => {
-    const password = [];
+    const newPass = [];
 
     const rows = elements[0].children;
     for (let row of rows) {
         for (let letter of row.children) {
             if (letter.style.backgroundColor === letter.style.color) {
-                password.push(letter.textContent);
+                newPass.push(letter.textContent);
             }
         }
     }
 
-    return password;
+    return newPass;
 }
 
 const showHiddenLetters = (elements) => {
@@ -38,8 +41,24 @@ const showHiddenLetters = (elements) => {
     }
 }
 
+const removeRows = (elements) => {
+    const cNode = elements[0].cloneNode(false);
+    elements[0].parentNode.replaceChild(cNode ,elements[0]);
+}
+
+const writePassword = (elements,writtenPass) => {
+    writtenPass.forEach(letter => {
+        const letterNode = document.createElement('td');
+        const letterText = document.createTextNode(letter);
+        letterNode.appendChild(letterText);
+        letterNode.style.backgroundColor = "000000"
+        letterNode.style.color = "#FFFFFF"
+        elements[0].appendChild(letterNode);
+    });
+}
+
 function getPassword(Letters) {
-    const password = findHiddenLetters(Letters);
+    password = findHiddenLetters(Letters);
     return password.join().replace(/,/g, '');
 }
 
@@ -52,4 +71,15 @@ function findPassword() {
 
 function showPassword() {
     showHiddenLetters(letters);
+}
+
+function setOneRow() {
+    removeRows(letters);
+    writePassword(letters,password);
+    disableButtons();
+}
+
+function disableButtons() {
+    document.getElementById('givePass').disabled = true;
+    document.getElementById('showPass').disabled = true;
 }
