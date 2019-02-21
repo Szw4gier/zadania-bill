@@ -1,3 +1,11 @@
 export interface IState {
-    checkedBoxes: Array<String>;
+    checkedBoxes: {
+        [key: string]: boolean
+    };
+}
+
+export interface ITreeData {
+    label: string;
+    value: string;
+    children: Array<ITreeData>;
 }

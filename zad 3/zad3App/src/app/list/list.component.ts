@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import data from '../../assets/mock_tree';
-import { IState } from '../models/state.model';
+import { IState, ITreeData } from '../models/state.model';
 
 @Component({
   selector: 'app-list',
@@ -8,33 +8,43 @@ import { IState } from '../models/state.model';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  state = <IState>{
-    checkedBoxes: Array<String>()
-  };
+  state = <IState>{};
 
-  tree: Array<Object>;
+  tree: Array<ITreeData>;
 
   constructor() {
-    this.state.checkedBoxes = [];
+    this.state.checkedBoxes = {};
     this.tree = data;
   }
 
   ngOnInit() {
-    console.log(this.tree);
+    this.state = this.initializeStateData(this.tree);
   }
 
-  checkStatus(element) {
-    this.changeStatus(element.value);
+  initializeStateData(treeData: Array<ITreeData>): IState {
+    let initState = <IState>{
+      checkedBoxes: {}
+    };
 
-    let childAmount = 0;
-    while (childAmount < element.children.lenght) {
-      this.changeStatus(element.children[childAmount].value);
+    treeData.forEach(parent => {
+      initState.checkedBoxes[parent.label] = false;
 
-      childAmount++;
-    }
+      parent.children.forEach(child => {
+        initState.checkedBoxes[child.label] = false;
+      })
+    });
+
+    return initState;
   }
 
-  changeStatus(value) {
-    this.state.checkedBoxes.push(value);
+  changeState(data: ITreeData, flag: boolean) {
+    this.state.checkedBoxes[data.label] = flag;
+    data.children.forEach(child => {
+      this.state.checkedBoxes[child.label] = flag;
+    });
+  }
+
+  changeStatus(data: ITreeData, input: HTMLInputElement): void {
+    this.changeState(data, input.checked);
   }
 }
