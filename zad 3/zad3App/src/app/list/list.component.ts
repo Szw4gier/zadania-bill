@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import data from '../../assets/mock_tree';
 import { IState, ITreeData } from '../models/state.model';
 import { DataflowService } from '../services/dataflow.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -11,12 +12,14 @@ import { DataflowService } from '../services/dataflow.service';
 export class ListComponent implements OnInit {
   private state = <IState>{};
   private tree: Array<ITreeData>;
+  searchData$: Observable<string>;
 
   constructor(
     private dataflow: DataflowService
   ) {
     this.state.checkedBoxes = {};
     this.tree = data;
+    this.searchData$ = this.dataflow.observeSearch$;
   }
 
   ngOnInit() {
@@ -40,7 +43,7 @@ export class ListComponent implements OnInit {
     return initState;
   }
 
-  changeState(dataTree: ITreeData, flag: boolean) {
+  changeState(dataTree: ITreeData, flag: boolean): void {
     this.state.checkedBoxes[dataTree.label] = flag;
     dataTree.children.forEach(child => {
       this.state.checkedBoxes[child.label] = flag;
@@ -52,7 +55,7 @@ export class ListComponent implements OnInit {
     this.changeState(dataTree, input.checked);
   }
 
-  showItems(dropdown: HTMLDivElement, btn: HTMLButtonElement) {
+  showItems(dropdown: HTMLDivElement, btn: HTMLButtonElement): void {
     dropdown.classList.toggle('tree__dropdown--showDropdown');
     btn.classList.toggle('tree__dropbtn--anchor');
   }

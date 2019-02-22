@@ -1,6 +1,10 @@
 .tree {
   display: flex;
 
+  &__parent {
+    display: flex;
+  }
+
   &__dropbtn {
     background: transparent;
     border: none;
