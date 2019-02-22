@@ -1,30 +1,38 @@
-<ul>
-  <div class="tree" *ngFor="let parent of tree">
-    <button
+<div class="tree" *ngFor="let parent of tree">
+  <div 
+    class="tree__parent" 
+    *ngIf="(searchData$ | async).includes(parent.label) ||
+            (searchData$ | async).length === 0">
+    <button 
       #btn 
-      (click)="showItems(drop,btn)" 
+      (click)="showItems(drop, btn)" 
       class="tree__dropbtn">
     </button>
     <input
       #input
-      (change)="changeStatus(parent,input)"
+      (change)="changeStatus(parent, input)"
       class="tree__checkbox"
-      id="{{parent.label}}" 
+      id="{{ parent.label }}"
       type="checkbox"
-      [checked]="state.checkedBoxes[parent.label]">
-    <label for="{{parent.label}}">{{parent.label}}</label>
+      [checked]="state.checkedBoxes[parent.label]"
+    />
+    <label for="{{ parent.label }}">{{ parent.label }}</label>
+  </div>
 
-    <div #drop class="tree__dropdown">
-      <div *ngFor="let child of parent.children">
-        <input
+  <div #drop class="tree__dropdown">
+    <div *ngFor="let child of parent.children">
+      <div *ngIf="(searchData$ | async).includes(child.label) ||
+            (searchData$ | async).length === 0">
+          <input
           #input
           (change)="changeStatus(child, input)"
           class="tree__checkbox"
-          id="{{child.label}}" 
+          id="{{ child.label }}"
           type="checkbox"
-          [checked]="state.checkedBoxes[child.label]">
-        <label for="{{child.label}}">{{child.label}}</label>
+          [checked]="state.checkedBoxes[child.label]"
+        />
+        <label for="{{ child.label }}">{{ child.label }}</label>
       </div>
     </div>
   </div>
-</ul>
+</div>
