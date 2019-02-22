@@ -2,7 +2,7 @@
   <div 
     class="tree__parent" 
     *ngIf="(searchData$ | async).includes(parent.label) ||
-            (searchData$ | async).length === 0">
+            (searchData$ | async)[0] === ''">
     <button 
       #btn 
       (click)="showItems(drop, btn)" 
@@ -22,8 +22,9 @@
   <div #drop class="tree__dropdown">
     <div *ngFor="let child of parent.children">
       <div *ngIf="(searchData$ | async).includes(child.label) ||
-            (searchData$ | async).length === 0">
-          <input
+            (searchData$ | async).includes(parent.label) || 
+            (searchData$ | async)[0] === ''">
+        <input
           #input
           (change)="changeStatus(child, input)"
           class="tree__checkbox"

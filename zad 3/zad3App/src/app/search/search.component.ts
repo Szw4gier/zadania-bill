@@ -11,7 +11,7 @@ export class SearchComponent implements OnInit {
   @HostListener('document:keyup', ['$event']) onkeyupHandler(
     event: KeyboardEvent
 ) {
-    this.dataflow.shareSearch(this.search.nativeElement.value);
+    this.dataflow.shareSearch(this.search.nativeElement.value.split(' '));
 }
 
   constructor(
@@ -19,6 +19,6 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.dataflow.shareSearch(this.search.nativeElement.value);
+    this.dataflow.shareSearch(this.search.nativeElement.value.split(' '));
   }
 }

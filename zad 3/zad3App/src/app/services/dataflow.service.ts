@@ -1,4 +1,4 @@
-import { Injectable, ElementRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { IState } from '../models/state.model';
 
@@ -7,7 +7,7 @@ import { IState } from '../models/state.model';
 })
 export class DataflowService {
   private stateSource = new Subject<IState>();
-  private searchSource = new BehaviorSubject<string>(null);
+  private searchSource = new BehaviorSubject<string[]>(null);
 
   observeState$ = this.stateSource.asObservable();
   observeSearch$ = this.searchSource.asObservable();
@@ -16,7 +16,7 @@ export class DataflowService {
     this.stateSource.next(state);
   }
 
-  shareSearch(searchData: string): void {
+  shareSearch(searchData: string[]): void {
     this.searchSource.next(searchData);
   }
 }
