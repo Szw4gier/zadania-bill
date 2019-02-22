@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
   }
 
   initializeStateData(treeData: Array<ITreeData>): IState {
-    let initState = <IState>{
+    const initState = <IState>{
       checkedBoxes: {}
     };
 
@@ -33,22 +33,27 @@ export class ListComponent implements OnInit {
 
       parent.children.forEach(child => {
         initState.checkedBoxes[child.label] = false;
-      })
+      });
     });
 
     this.dataflow.stateChanged(initState);
     return initState;
   }
 
-  changeState(data: ITreeData, flag: boolean) {
-    this.state.checkedBoxes[data.label] = flag;
-    data.children.forEach(child => {
+  changeState(dataTree: ITreeData, flag: boolean) {
+    this.state.checkedBoxes[dataTree.label] = flag;
+    dataTree.children.forEach(child => {
       this.state.checkedBoxes[child.label] = flag;
     });
     this.dataflow.stateChanged(this.state);
   }
 
-  changeStatus(data: ITreeData, input: HTMLInputElement): void {
-    this.changeState(data, input.checked);
+  changeStatus(dataTree: ITreeData, input: HTMLInputElement): void {
+    this.changeState(dataTree, input.checked);
+  }
+
+  showItems(dropdown: HTMLDivElement, btn: HTMLButtonElement) {
+    dropdown.classList.toggle('tree__dropdown--showDropdown');
+    btn.classList.toggle('tree__dropbtn--anchor');
   }
 }
