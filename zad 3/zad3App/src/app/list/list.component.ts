@@ -12,8 +12,8 @@ import { Observable } from 'rxjs';
 export class ListComponent implements OnInit {
   private state = <IState>{};
   private tree: Array<ITreeData>;
-  searchData$: Observable<string>;
-
+  searchData$: Observable<Array<string>>;
+  test = [''];
   constructor(
     private dataflow: DataflowService
   ) {
