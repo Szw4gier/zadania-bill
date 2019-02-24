@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataflowService } from '../services/dataflow.service';
+import { DataflowService } from '../../services/dataflow.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
