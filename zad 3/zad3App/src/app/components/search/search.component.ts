@@ -3,7 +3,6 @@ import {
   OnInit,
   ElementRef,
   ViewChild,
-  HostListener,
   Output,
   EventEmitter
 } from '@angular/core';
@@ -16,11 +15,10 @@ import {
 export class SearchComponent implements OnInit {
   @ViewChild('search') search: ElementRef;
   @Output() queryEmit = new EventEmitter();
-  @HostListener('document:keyup', ['$event']) onkeyupHandler(
-    event: KeyboardEvent
-) {
-  this.queryEmit.emit(this.search.nativeElement.value.split(' '));
-}
+
+  emitQuery(): void {
+    this.queryEmit.emit(this.search.nativeElement.value.split(' '));
+  }
 
   ngOnInit() {
     this.queryEmit.emit(this.search.nativeElement.value.split(' '));

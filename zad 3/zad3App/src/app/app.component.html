@@ -1,5 +1,9 @@
 <div>
   <app-selected></app-selected>
   <app-search (queryEmit)="searchQueryChanged($event)"></app-search>
-  <app-list [tree]="tree" [state]="state" (itemEmit)="itemChanged($event)"></app-list>
+  <app-list 
+    [tree]="tree" 
+    [state]="state" 
+    (itemEmit)="itemChanged($event)">
+  </app-list>
 </div>
