@@ -32,4 +32,8 @@ export class AppComponent implements OnInit {
     this.state = this.dataflow.changeState(this.state, treeItem);
     this.dataflow.stateChanged(this.state);
   }
+
+  searchQueryChanged(query: string[]): void {
+    this.state = this.dataflow.changeStateQuery(this.state, query);
+  }
 }

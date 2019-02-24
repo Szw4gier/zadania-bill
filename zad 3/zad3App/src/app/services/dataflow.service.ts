@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { IState } from '../models/state.model';
 import { ITreeData } from '../models/tree.model';
 
@@ -8,22 +8,12 @@ import { ITreeData } from '../models/tree.model';
 })
 export class DataflowService {
   private stateSource = new Subject<IState>();
-  private searchSource = new BehaviorSubject<string[]>(null);
 
   observeState$ = this.stateSource.asObservable();
-  observeSearch$ = this.searchSource.asObservable();
 
   stateChanged(state: IState): void {
     this.stateSource.next(state);
   }
-
-  shareSearch(searchData: string[]): void {
-    this.searchSource.next(searchData);
-  }
-
-
-
-
 
   initializeStateData(treeData: Array<ITreeData>): IState {
     const initState = <IState>{
@@ -38,6 +28,8 @@ export class DataflowService {
       });
     });
 
+    initState.searchQuery = [];
+
     return initState;
   }
 
@@ -47,6 +39,11 @@ export class DataflowService {
       state.checkedBoxes[child.label] = state.checkedBoxes[treeItem.label];
     });
 
+    return state;
+  }
+
+  changeStateQuery(state: IState, query: string[]): IState {
+    state.searchQuery = query;
     return state;
   }
 }

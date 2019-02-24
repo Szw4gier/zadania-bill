@@ -25,4 +25,21 @@ export class ListComponent {
     dropdown.classList.toggle('tree__dropdown--showDropdown');
     btn.classList.toggle('tree__dropbtn--anchor');
   }
+
+  showParent(parent: ITreeData): boolean {
+    if (this.state.searchQuery.includes(parent.label) ||
+    this.state.searchQuery[0] === '') {
+      return true;
+    }
+    return false;
+  }
+
+  showChild(child: ITreeData, parent: ITreeData): boolean {
+    if (this.state.searchQuery.includes(child.label) ||
+    this.state.searchQuery.includes(parent.label) ||
+    this.state.searchQuery[0] === '') {
+      return true;
+    }
+    return false;
+  }
 }
