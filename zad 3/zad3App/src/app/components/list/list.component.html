@@ -1,0 +1,19 @@
+<div class="tree" *ngFor="let parent of tree">
+  <div class="tree__parent" >
+    <button #btn (click)="showItems(drop, btn)" class="tree__dropbtn">
+    </button>
+    <input (change)="changeStatus(parent)" class="tree__checkbox" id="{{ parent.label }}" type="checkbox"
+    [checked]="state.checkedBoxes[parent.label]" />
+    <label for="{{ parent.label }}">{{ parent.label }}</label>
+  </div>
+
+  <div #drop class="tree__dropdown">
+    <div *ngFor="let child of parent.children">
+      <div >
+        <input (change)="changeStatus(child)" class="tree__checkbox" id="{{ child.label }}"
+          type="checkbox" [checked]="state.checkedBoxes[child.label]" />
+        <label for="{{ child.label }}">{{ child.label }}</label>
+      </div>
+    </div>
+  </div>
+</div>

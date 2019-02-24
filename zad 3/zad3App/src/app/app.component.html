@@ -1,6 +1,5 @@
 <div>
   <app-selected></app-selected>
   <app-search></app-search>
-  <app-list></app-list>
+  <app-list [tree]="tree" [state]="state" (itemEmit)="itemChanged($event)"></app-list>
 </div>
-
