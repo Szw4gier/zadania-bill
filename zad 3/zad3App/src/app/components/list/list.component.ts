@@ -27,17 +27,26 @@ export class ListComponent {
   }
 
   showParent(parent: ITreeData): boolean {
-    if (this.state.searchQuery.includes(parent.label) ||
+    if (
+    this.state.searchQuery.includes(parent.label) ||
     this.state.searchQuery[0] === '') {
       return true;
     }
     return false;
   }
 
-  showChild(child: ITreeData, parent: ITreeData): boolean {
-    if (this.state.searchQuery.includes(child.label) ||
+  showChild(
+    child: ITreeData,
+    parent: ITreeData,
+    dropdown: HTMLDivElement
+    ): boolean {
+    if (
+    this.state.searchQuery.includes(child.label) ||
     this.state.searchQuery.includes(parent.label) ||
     this.state.searchQuery[0] === '') {
+      if(this.state.searchQuery.includes(child.label)){
+        dropdown.classList.toggle('tree__dropdown--showDropdown');
+      }
       return true;
     }
     return false;
