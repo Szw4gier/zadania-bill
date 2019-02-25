@@ -16,6 +16,7 @@ export class ListComponent {
   @Input() tree: ITreeData;
   @Input() state: IState;
   @Output() itemEmit = new EventEmitter();
+  private childToggle = 0;
 
   changeStatus(treeData: ITreeData): void {
     this.itemEmit.emit(treeData);
@@ -26,10 +27,14 @@ export class ListComponent {
     btn.classList.toggle('tree__dropbtn--anchor');
   }
 
-  showParent(parent: ITreeData): boolean {
+  showParent(parent: ITreeData, dropdown: HTMLDivElement): boolean {
     if (
     this.state.searchQuery.includes(parent.label) ||
     this.state.searchQuery[0] === '') {
+      if (this.childToggle % 2 === 1) {
+        dropdown.classList.toggle('tree__dropdown--showDropdown');
+        this.childToggle++;
+      }
       return true;
     }
     return false;
@@ -44,8 +49,9 @@ export class ListComponent {
     this.state.searchQuery.includes(child.label) ||
     this.state.searchQuery.includes(parent.label) ||
     this.state.searchQuery[0] === '') {
-      if(this.state.searchQuery.includes(child.label)){
+      if (this.state.searchQuery.includes(child.label) && this.childToggle % 2 === 0) {
         dropdown.classList.toggle('tree__dropdown--showDropdown');
+        this.childToggle++;
       }
       return true;
     }

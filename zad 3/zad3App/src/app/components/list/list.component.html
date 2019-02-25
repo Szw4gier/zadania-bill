@@ -1,5 +1,5 @@
 <div #tree class="tree" *ngFor="let parent of tree">
-  <div class="tree__parent" *ngIf="showParent(parent)">
+  <div class="tree__parent" *ngIf="showParent(parent, drop)">
     <button #btn (click)="showItems(drop, btn)" class="tree__dropbtn">
     </button>
     <input 
